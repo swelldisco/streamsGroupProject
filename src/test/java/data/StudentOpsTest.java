@@ -38,5 +38,6 @@ public class StudentOpsTest {
             List<Student> filteredStudents = StudentOps.filterStudentsByGender(students, "Female");
             assertEquals("Female",filteredStudents.get(5).getGender());
         }
+
     }
 

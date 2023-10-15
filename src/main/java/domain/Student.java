@@ -11,6 +11,7 @@ public class Student {
     private final String email;
     private final String gender;
     private final LocalDate dob;
+    private int age;
 
     public Student(Integer id, String first_name, String last_name, String email, String gender, String dob) {
         this.id = id;
@@ -43,6 +44,14 @@ public class Student {
 
     public LocalDate getDob() {
         return dob;
+    }
+
+    public int getAge() {
+        return age; // Getter for age
+    }
+
+    public void setAge(int age) {
+        this.age = age; // Setter for age
     }
 
     @Override
