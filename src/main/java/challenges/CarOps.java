@@ -13,35 +13,33 @@ public class CarOps {
     //21. Filter by Make: Filter the list of cars to only include cars with a specific make.
     public static List<Car> carWithSpecificMake(List<Car> cars){
         return cars.stream()
-                .filter(car -> car.getMake().equalsIgnoreCase("Ford"))
-                .collect(Collectors.toList());
+                .filter(c -> c.getMake().equalsIgnoreCase("MINI"))
+                .toList();
     }
     //31. Count Cars by Make: Count the number of cars for each make.
     public static Map<String, Long> countCarsByMake (List<Car> cars){
         return cars.stream()
-                .collect(Collectors.groupingBy(Car::getMake, Collectors.counting()));
+                .collect(Collectors.groupingBy(c -> c.getMake(), Collectors.counting()));
     }
 
 
     //32. Average Price: Calculate the average price of all cars.
     public static double averagePriceOfCars (List<Car> cars){
-                OptionalDouble avg = cars.stream()
-                .mapToDouble(Car::getPrice)
-                .average();
-        return avg.orElse(0.0);
+                return cars.stream()
+                        .map(c -> c.getPrice())
+                        .collect(Collectors.averagingDouble(d -> d.doubleValue()));
     }
 
     //33. Sum of Prices: Calculate the sum of all car prices.
     public static double sumOfPriceOfCars(List<Car> cars){
          return cars.stream()
-                 .mapToDouble(car -> (double) car.getPrice())
-                 .reduce(0, Double::sum);
-
+                .map(c -> c.getPrice())
+                .collect(Collectors.summingDouble(d -> d.doubleValue()));
     }
     //34. Any Car with Blue Color: Check if there's any car with a blue color.
     public static boolean carsWithBlueColor(List<Car> cars){
        return cars.stream()
-                .anyMatch(car -> car.getColor().equalsIgnoreCase("blue"));
+                .anyMatch(c -> c.getColor().equalsIgnoreCase("blue"));
     }
 
     //35. All Cars are Expensive: Check if all cars are expensive (e.g., price > 50000).
@@ -81,7 +79,7 @@ public class CarOps {
     //40. Concatenate Make and Model: Concatenate the make and model of each car.
     public static List<String> concatenatingMakeAndModel(List<Car> cars){
         return cars.stream()
-                .map(car -> car.getModel() + " " + car.getModel())
+                .map(car -> car.getMake() + " " + car.getModel())
                 .collect(Collectors.toList());
     }
 

@@ -1,8 +1,6 @@
 package domain;
 import java.time.LocalDate;
 
-import java.time.LocalDate;
-
 public class Student {
 
     private final Integer id;
