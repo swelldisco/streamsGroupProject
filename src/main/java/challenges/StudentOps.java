@@ -201,10 +201,10 @@ public class StudentOps {
             .mapToDouble(s -> s.getAge())
             .toArray();
             
-        double sum = Arrays.stream(tempList)
-            .sum();
+        double mean = Arrays.stream(tempList)
+            .average()
+            .orElse(0.0);
 
-        double mean = sum / length;
         double standardDeviation = 0.00;
 
         for (double n : tempList) {
