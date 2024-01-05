@@ -31,10 +31,9 @@ public class StudentOps {
 
     //3. Calculate Average Age: Calculate the average age of all students.
     public static double averageStudentAge(List<Student> students) {
-        LocalDate today = LocalDate.now();
         students.stream()
             .forEach(a -> {
-                int years = Period.between(a.getDob(), today).getYears();
+                int years = Period.between(a.getDob(), LocalDate.now()).getYears();
                 a.setAge(years);
             });
         return students.stream()
@@ -56,10 +55,9 @@ public class StudentOps {
 
     // 6. Find Maximum Age: Find the maximum age among all students.
     public static int findMaximumAge(List<Student> students) {
-        LocalDate today = LocalDate.now();
         students.stream()
             .forEach(s -> {
-                int years = Period.between(s.getDob(), today).getYears();
+                int years = Period.between(s.getDob(), LocalDate.now()).getYears();
                 s.setAge(years);
             });
         Optional<Integer> maxAge = students.stream()
@@ -84,9 +82,9 @@ public class StudentOps {
 
     // 9. Check if Any Student is Adult: Check if any student is an adult (age 18 or older).
     public static boolean AnyAdultStudents(List<Student> students) {
-        LocalDate yearsAgo = LocalDate.now().minusYears(18);
+        LocalDate eighteenYearAgo = LocalDate.now().minusYears(18);
         return students.stream()
-            .anyMatch(s -> s.getDob().isBefore(yearsAgo));
+            .anyMatch(s -> s.getDob().isBefore(eighteenYearAgo));
     }
 
     // 10. Count Students by Gender: Count the number of students for each gender.
@@ -114,10 +112,9 @@ public class StudentOps {
 
     // 13: Calculate Age Sum: Calculate the sum of ages for all students.
     public static int sumAllTheAges(List<Student> students) {
-        LocalDate today = LocalDate.now();
         students.stream()
             .forEach(s-> {
-                int age = Period.between(s.getDob(), today).getYears();
+                int age = Period.between(s.getDob(), LocalDate.now()).getYears();
                 s.setAge(age);
             });
         return students.stream()
@@ -127,9 +124,9 @@ public class StudentOps {
 
     // 14. Check if All Students are Adults: Check if all students are adults (age 18 or older).
     public static boolean areAllStudentsAdults(List<Student> students) {
-        LocalDate onceUponATime = LocalDate.now().minusYears(18);
+        LocalDate eightteenYearsAgo = LocalDate.now().minusYears(18);
         return students.stream()
-            .noneMatch(s -> s.getDob().isAfter(onceUponATime));
+            .noneMatch(s -> s.getDob().isAfter(eightteenYearsAgo));
     }
 
     // 15. Find Oldest Student: Find the oldest student.
