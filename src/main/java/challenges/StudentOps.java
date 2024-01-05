@@ -7,7 +7,6 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -190,28 +189,41 @@ public class StudentOps {
 
     // 20. Calculate Age Standard Deviation: Calculate the standard deviation of ages for all students.
     public static double getStandardDeviationOfAge(List<Student> students) {
-        double length = students.size();
+        // far more gradeful solution from Ajmal:
         students.stream()
             .forEach(s -> {
                 int age = Period.between(s.getDob(), LocalDate.now()).getYears();
                 s.setAge(age);
             });
 
-        double[] tempList = students.stream()
+        double mean = students.stream()
             .mapToDouble(s -> s.getAge())
-            .toArray();
-            
-        double mean = Arrays.stream(tempList)
             .average()
             .orElse(0.0);
 
-        double standardDeviation = 0.00;
+        return Math.sqrt(
+            students.stream()
+                .mapToDouble(s -> Math.pow(s.getAge() - mean, 2))
+                .average()
+                .orElse(0.0)
+        );
+        
+        // old clunky maybe solution:
+        // double[] tempList = students.stream()
+        //     .mapToDouble(s -> s.getAge())
+        //     .toArray();
+            
+        // double mean = Arrays.stream(tempList)
+        //     .average()
+        //     .orElse(0.0);
 
-        for (double n : tempList) {
-            standardDeviation += Math.pow(n - mean, 2);
-        }
+        // double standardDeviation = 0.00;
 
-        return Math.sqrt(standardDeviation / length);
+        // for (double n : tempList) {
+        //     standardDeviation += Math.pow(n - mean, 2);
+        // }
+
+        // return Math.sqrt(standardDeviation / length);
     }
 
 }
